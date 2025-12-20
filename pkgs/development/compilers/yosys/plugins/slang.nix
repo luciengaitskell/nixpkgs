@@ -18,7 +18,7 @@ stdenv.mkDerivation {
     owner = "povik";
     repo = "yosys-slang";
     rev = "23e0653c85f6ed4127e665a2529b069ce550e967";
-    hash = "sha256-7syN26lrLJXsVXsbWUn2uPHpv3nN9f6ONyFXg0lCxGY=";
+    hash = "sha256-7axr4JyxTtnCbI6l23A9LoBco3b3bqEMKoTEc1KNOQI=";
     fetchSubmodules = true;
   };
 
