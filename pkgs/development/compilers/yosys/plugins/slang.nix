@@ -40,7 +40,7 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/share/yosys/plugins
-    cp build/slang.so $out/share/yosys/plugins/slang.so
+    cp slang.so $out/share/yosys/plugins/slang.so
     runHook postInstall
   '';
 
