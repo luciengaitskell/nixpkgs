@@ -27,8 +27,11 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
-    glslang
     libxcb
+  ];
+
+  propagatedBuildInputs = [
+    glslang
     vulkan-headers
     vulkan-loader
   ];
