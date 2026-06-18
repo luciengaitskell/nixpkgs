@@ -5,15 +5,15 @@
   nixosTests,
 }:
 
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   pname = "c2FmZQ";
-  version = "0.5.3";
+  version = "0.5.6";
 
   src = fetchFromGitHub {
     owner = "c2FmZQ";
     repo = "c2FmZQ";
-    rev = "v${version}";
-    hash = "sha256-SBCUOQpV03kZu6nHuwTUd8gyKeK+XAthZ+H7IRYFjdM=";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-qIJnrMqsaa7GcsJpyWHhi6nea72XCQy5BaGWBtQKzFo=";
   };
 
   ldflags = [
@@ -21,9 +21,9 @@ buildGoModule rec {
     "-w"
   ];
 
-  sourceRoot = "${src.name}/c2FmZQ";
+  sourceRoot = "${finalAttrs.src.name}/c2FmZQ";
 
-  vendorHash = "sha256-jyos/CNQyuatq4KL2nqCPtRuMQLZMB35VECiKQhq4go=";
+  vendorHash = "sha256-hJHnbG/NlhibY8e59hk0u5vi50x4s4mH/awPdCRkDFk=";
 
   subPackages = [
     "c2FmZQ-client"
@@ -40,4 +40,4 @@ buildGoModule rec {
     maintainers = with lib.maintainers; [ hmenke ];
     platforms = lib.platforms.linux;
   };
-}
+})

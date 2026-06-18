@@ -6,18 +6,18 @@
   stdenv,
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "charasay";
-  version = "3.3.0";
+  version = "3.3.1";
 
   src = fetchFromGitHub {
     owner = "latipun7";
     repo = "charasay";
-    rev = "v${version}";
-    hash = "sha256-NB2GDDFH9IW/c0acMojYHuzPrx0J3tjlDqjQa6ZRbN4=";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-VkDOdZt0Z/kuBwFm5utXYsxT59a1uapU9ouzB1ymmXs=";
   };
 
-  cargoHash = "sha256-i2CvwQXKKfYLdK0tKf/w4TepPyMo99v1I+kIr00PWcY=";
+  cargoHash = "sha256-6AczT5VvOryOlcOMNFxcHqy8K1sm4tbhb6+LsCNHW14=";
 
   nativeBuildInputs = [ installShellFiles ];
 
@@ -39,4 +39,4 @@ rustPlatform.buildRustPackage rec {
     maintainers = with lib.maintainers; [ hmajid2301 ];
     mainProgram = "chara";
   };
-}
+})

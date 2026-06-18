@@ -11,10 +11,9 @@
   libGLU,
   libjack2,
   libsndfile,
-  libXdmcp,
+  libxdmcp,
   lv2,
   minixml,
-  pcre,
   pkg-config,
   readline,
   libpthread-stubs,
@@ -23,13 +22,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "yoshimi";
-  version = "2.3.5.2";
+  version = "2.3.6.2";
 
   src = fetchFromGitHub {
     owner = "Yoshimi";
     repo = "yoshimi";
-    rev = finalAttrs.version;
-    hash = "sha256-X4g4AhPHg2ezHnAm8fWunatZgr3/PZxibzACplWogo8=";
+    tag = finalAttrs.version;
+    hash = "sha256-jSCOsSJdG1dt/i5iTaQngagYnokPNsNExF2fJxxUWSY=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/src";
@@ -53,10 +52,9 @@ stdenv.mkDerivation (finalAttrs: {
     libGLU
     libjack2
     libsndfile
-    libXdmcp
+    libxdmcp
     lv2
     minixml
-    pcre
     readline
     libpthread-stubs
     zlib

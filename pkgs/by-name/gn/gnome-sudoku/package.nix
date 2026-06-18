@@ -23,11 +23,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gnome-sudoku";
-  version = "49.3";
+  version = "50.1";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gnome-sudoku/${lib.versions.major finalAttrs.version}/gnome-sudoku-${finalAttrs.version}.tar.xz";
-    hash = "sha256-ybVGyN/pcWHfXVD1U4GCp0FTYmy8NoBbB4FSjvM7xZU=";
+    hash = "sha256-CwbJd37Ns1oPzZLRZJZCVJ3oFmKfSJ9dkzMVo03Me+I=";
   };
 
   nativeBuildInputs = [

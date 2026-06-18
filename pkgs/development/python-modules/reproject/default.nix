@@ -6,6 +6,7 @@
   buildPythonPackage,
   cython,
   dask,
+  dask-image,
   extension-helpers,
   fetchFromGitHub,
   fsspec,
@@ -26,14 +27,14 @@
 
 buildPythonPackage rec {
   pname = "reproject";
-  version = "0.15.0";
+  version = "0.20.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "astropy";
     repo = "reproject";
     tag = "v${version}";
-    hash = "sha256-gv5LOxXTNdHSx4Q4ydi/QBHhc7/E/DXJD7WuPBAH0dE=";
+    hash = "sha256-eeMgkjYIZPGsxwRDPtTzjnlusCxu6vPSZiaDekxobs4=";
   };
 
   build-system = [
@@ -48,6 +49,7 @@ buildPythonPackage rec {
     astropy
     astropy-healpix
     dask
+    dask-image
     fsspec
     numpy
     pillow

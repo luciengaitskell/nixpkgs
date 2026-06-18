@@ -14,12 +14,12 @@
 
 let
   pname = "ex_doc";
-  version = "0.40.0";
+  version = "0.40.3";
   src = fetchFromGitHub {
     owner = "elixir-lang";
     repo = "${pname}";
     rev = "v${version}";
-    hash = "sha256-jz/9zIylMe7opCLt9wQ4GhR7bvAenWU8MOEACIvLKzk=";
+    hash = "sha256-xGZCBnjYr+0x6JNcf0XZVdaKaUB8V72GuZI3lEunzic=";
   };
 in
 mixRelease {
@@ -37,7 +37,7 @@ mixRelease {
   mixFodDeps = fetchMixDeps {
     pname = "mix-deps-${pname}";
     inherit src version elixir;
-    hash = "sha256-pMIm0lVMqkuiprp0XeVB+x4VTh+hQR3t8dk5OBmnIqA=";
+    hash = "sha256-FSLAQhFk7NCUXRMfNr6E9XvndrviapjcKZDisHbB87Y=";
   };
 
   passthru = {

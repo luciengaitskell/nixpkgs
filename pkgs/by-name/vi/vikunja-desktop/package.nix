@@ -3,11 +3,11 @@
   stdenv,
   makeWrapper,
   makeDesktopItem,
-  pnpm,
+  pnpm_10_29_2,
   pnpmConfigHook,
   nodejs,
   electron,
-  unstableGitUpdater,
+  nix-update-script,
   fetchFromGitHub,
   fetchPnpmDeps,
   vikunja,
@@ -15,12 +15,12 @@
 
 let
   executableName = "vikunja-desktop";
-  version = "0.24.6";
+  version = "2.3.0";
   src = fetchFromGitHub {
     owner = "go-vikunja";
     repo = "vikunja";
     rev = "v${version}";
-    hash = "sha256-yUUZ6gPI2Bte36HzfUE6z8B/I1NlwWDSJA2pwkuzd34=";
+    hash = "sha256-bdHiSFaN0vNQMhy6GPlpoFeYrk2CLvO7E30d8J/9GC0=";
   };
 in
 stdenv.mkDerivation (finalAttrs: {
@@ -29,7 +29,6 @@ stdenv.mkDerivation (finalAttrs: {
   inherit version src;
 
   sourceRoot = "${finalAttrs.src.name}/desktop";
-  pnpmInstallFlags = [ "--shamefully-hoist" ];
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs)
@@ -37,10 +36,10 @@ stdenv.mkDerivation (finalAttrs: {
       version
       src
       sourceRoot
-      pnpmInstallFlags
       ;
-    fetcherVersion = 1;
-    hash = "sha256-orFwjmS1KF82JiQa+BE92YOtKsnYiKVzLXrpjtbe1z8=";
+    pnpm = pnpm_10_29_2;
+    fetcherVersion = 3;
+    hash = "sha256-phvNUUYh858CDt0O8GCWkgO402C0wiYtzEorOIV789M=";
   };
 
   env = {
@@ -50,7 +49,7 @@ stdenv.mkDerivation (finalAttrs: {
   nativeBuildInputs = [
     makeWrapper
     nodejs
-    pnpm
+    pnpm_10_29_2
     pnpmConfigHook
     vikunja.passthru.frontend
   ];
@@ -94,9 +93,7 @@ stdenv.mkDerivation (finalAttrs: {
     true
   '';
 
-  passthru.updateScript = unstableGitUpdater {
-    url = "${src.meta.homepage}.git";
-  };
+  passthru.updateScript = nix-update-script { };
 
   # The desktop item properties should be kept in sync with data from upstream:
   desktopItem = makeDesktopItem {
@@ -112,10 +109,10 @@ stdenv.mkDerivation (finalAttrs: {
     ];
   };
 
-  meta = with lib; {
+  meta = {
     description = "Desktop App of the Vikunja to-do list app";
     homepage = "https://vikunja.io/";
-    license = licenses.gpl3Plus;
+    license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ kolaente ];
     mainProgram = "vikunja-desktop";
     inherit (electron.meta) platforms;

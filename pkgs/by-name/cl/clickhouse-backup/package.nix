@@ -7,21 +7,21 @@
   versionCheckHook,
 }:
 
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   pname = "clickhouse-backup";
-  version = "2.6.41";
+  version = "2.7.2";
 
   src = fetchFromGitHub {
     owner = "Altinity";
     repo = "clickhouse-backup";
-    tag = "v${version}";
-    hash = "sha256-LBwmdGcQuDu0tr9c67bboBzv6ypxzYRU36Z76lL94yo=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-rzCVuyG04IHl5oUyw9XuyN56tM/AzAmveZ9NsB7Co68=";
   };
 
-  vendorHash = "sha256-UxbQ/Q4HsTBkbIMBdeKns6t8tZnfdBRaHDMOA2RYDLI=";
+  vendorHash = "sha256-MZfAEXoONdx/2Zb4NeDrdM1WT4jnqhwdNkMm6QzasGY=";
 
   ldflags = [
-    "-X main.version=${version}"
+    "-X main.version=${finalAttrs.version}"
   ];
 
   postConfigure = ''
@@ -46,4 +46,4 @@ buildGoModule rec {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ devusb ];
   };
-}
+})

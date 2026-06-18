@@ -8,13 +8,13 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "dua";
-  version = "2.33.0";
+  version = "2.35.0";
 
   src = fetchFromGitHub {
     owner = "Byron";
     repo = "dua-cli";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-3Mlhz+vYeDSoVLuBFAtgJxrECwUchSWIusrLKqhxU30=";
+    hash = "sha256-dlm8jp7Bh0DgUN4ztalE6uPSzeJy+JDfai39xZKiptw=";
     # Remove unicode file names which leads to different checksums on HFS+
     # vs. other filesystems because of unicode normalisation.
     postFetch = ''
@@ -22,12 +22,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
     '';
   };
 
-  cargoHash = "sha256-85I+rWomp+2G1DLbwowHDSrRm6dS4b99Ia24ffY7Fnk=";
+  cargoHash = "sha256-620Emfkuzyc8/LVr8codB1/IAemxDBOnhS/rL6gR8R8=";
 
   checkFlags = [
     # Skip interactive tests
     "--skip=interactive::app::tests::journeys_readonly::quit_instantly_when_nothing_marked"
     "--skip=interactive::app::tests::journeys_readonly::quit_requires_two_presses_when_items_marked"
+    "--skip=interactive::app::tests::journeys_readonly::once_allows_replayed_quit_to_exit stdout"
     "--skip=interactive::app::tests::journeys_readonly::simple_user_journey_read_only"
     "--skip=interactive::app::tests::journeys_with_writes::basic_user_journey_with_deletion"
     "--skip=interactive::app::tests::unit::it_can_handle_ending_traversal_reaching_top_but_skipping_levels"

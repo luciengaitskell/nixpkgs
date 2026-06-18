@@ -9,19 +9,19 @@
 
 buildPythonPackage rec {
   pname = "uuid-utils";
-  version = "0.14.0";
+  version = "0.16.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "aminalaee";
     repo = "uuid-utils";
     tag = version;
-    hash = "sha256-zjf9+vqrDaI8PbOj+xNgMUIj6SvcJAHhCQAYbtkYpuQ=";
+    hash = "sha256-vHezizqhVS6vHowX7231ZJtmEDOp8PG4KtJgSwevqWM=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit pname src version;
-    hash = "sha256-JiAuJvlacQt9acOyGHxR2lV7IQPBpX/lLd/UhKGhdrI=";
+    hash = "sha256-MG2IonqvB+G8Vz+fHls/F8sUEGhXO2nA4a027yhfrCk=";
   };
 
   nativeBuildInputs = with rustPlatform; [

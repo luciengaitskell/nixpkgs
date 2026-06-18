@@ -30,13 +30,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = if withDPDK then "openvswitch-dpdk" else "openvswitch";
-  version = "3.6.1";
+  version = "3.7.1";
 
   src = fetchFromGitHub {
     owner = "openvswitch";
     repo = "ovs";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-I5ISLOu1MMT/mtyH4tcgdFe2zjSsutMWkJiPIbadbQI=";
+    hash = "sha256-3FQjV4BZZpn7Loiu9Xm30cCqzkU1HgJ3sAc+I6D8OvQ=";
   };
 
   outputs = [
@@ -51,6 +51,8 @@ stdenv.mkDerivation (finalAttrs: {
     # 8: vsctl-bashcomp - argument completion FAILED (completion.at:664)
     ./patches/disable-bash-arg-completion-test.patch
   ];
+
+  strictDeps = true;
 
   nativeBuildInputs = [
     autoconf
@@ -129,6 +131,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeCheckInputs = [
     iproute2
+    openssl
   ]
   ++ (with python3.pkgs; [
     netaddr
@@ -168,8 +171,6 @@ stdenv.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [
       adamcstephens
       booxter
-      kmcopper
-      netixx
       xddxdd
     ];
     platforms = lib.platforms.linux;

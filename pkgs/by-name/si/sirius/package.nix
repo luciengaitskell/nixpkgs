@@ -106,6 +106,7 @@ stdenv.mkDerivation (finalAttrs: {
   ++ lib.optionals (gpuBackend == "rocm") [
     rocmPackages.clr
     rocmPackages.rocblas
+    rocmPackages.rocsolver
   ]
   ++ lib.optionals stdenv.hostPlatform.isDarwin [
     llvmPackages.openmp
@@ -133,7 +134,7 @@ stdenv.mkDerivation (finalAttrs: {
     ]
   );
 
-  CXXFLAGS = [
+  env.CXXFLAGS = toString [
     # GCC 13: error: 'uintptr_t' in namespace 'std' does not name a type
     "-include cstdint"
   ];
@@ -160,7 +161,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-DSIRIUS_CREATE_PYTHON_MODULE=ON"
   ];
 
-  doCheck = true;
+  doCheck = !umpire.passthru.rocmSupport;
 
   # Can not run parallel checks generally as it requires exactly multiples of 4 MPI ranks
   # Even cpu_serial tests had to be disabled as they require scalapack routines in the sandbox

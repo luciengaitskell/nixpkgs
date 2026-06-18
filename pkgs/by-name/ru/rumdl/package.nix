@@ -11,16 +11,16 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "rumdl";
-  version = "0.1.8";
+  version = "0.2.16";
 
   src = fetchFromGitHub {
     owner = "rvben";
     repo = "rumdl";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-W6+4InVhfROlH0IwtmPanxc0OAl4rooiuz8lKAFRRoI=";
+    hash = "sha256-iAro4RHLiuZwu1w2ZLdkhrypyZzu8gxGRuODg4FZoiw=";
   };
 
-  cargoHash = "sha256-ATODqtHCNEZcYm2CdvrHz8L1c+AcKfXkUGhVbUyW9Wg=";
+  cargoHash = "sha256-FBx75yBcz2lDlMo7fReYXpukF/dmnvl7RS1ByL4HG4s=";
 
   cargoBuildFlags = [
     "--bin=rumdl"
@@ -34,9 +34,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
     gitMinimal
   ];
 
+  __darwinAllowLocalNetworking = true;
+
   useNextest = true;
 
   cargoTestFlags = [
+    "--lib"
+
     # Prefer the "smoke" profile over "ci" to exclude flaky tests: https://github.com/rvben/rumdl/pull/341
     "--profile"
     "smoke"

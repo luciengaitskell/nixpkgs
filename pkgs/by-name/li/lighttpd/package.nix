@@ -32,13 +32,13 @@
   nixosTests,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lighttpd";
-  version = "1.4.82";
+  version = "1.4.83";
 
   src = fetchurl {
-    url = "https://download.lighttpd.net/lighttpd/releases-${lib.versions.majorMinor version}.x/${pname}-${version}.tar.xz";
-    sha256 = "sha256-q/50OR+cvWarFU6gfmTxlNvn6QbvTtR+s7DztGJGyWI=";
+    url = "https://download.lighttpd.net/lighttpd/releases-${lib.versions.majorMinor finalAttrs.version}.x/lighttpd-${finalAttrs.version}.tar.xz";
+    sha256 = "sha256-s/h4FWSAB5+Kk5A70k1FYHSg++25tNmfzWXfM7H1ZvA=";
   };
 
   separateDebugInfo = true;
@@ -117,4 +117,4 @@ stdenv.mkDerivation rec {
     ];
     mainProgram = "lighttpd";
   };
-}
+})

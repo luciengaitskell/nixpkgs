@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  fetchpatch,
 
   # nativeBuildInputs
   cmake,
@@ -51,6 +50,14 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-u9wswlFkGpPgJaBwSddnpv49wBAmkKRwWFO5jQ9/twA=";
   };
 
+  # Fix boost 1.89 compatibility
+  postPatch = ''
+    substituteInPlace CMakeLists.txt \
+      --replace-fail \
+        "find_package(Boost COMPONENTS thread filesystem system program_options date_time chrono timer serialization REQUIRED)" \
+        "find_package(Boost COMPONENTS thread filesystem program_options date_time chrono timer serialization REQUIRED)"
+  '';
+
   nativeBuildInputs = [
     cmake
     qt6.wrapQtAppsHook
@@ -87,7 +94,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   # Configure environment variables
-  NIX_CFLAGS_COMPILE = "-Wno-c++20-extensions";
+  env.NIX_CFLAGS_COMPILE = "-Wno-c++20-extensions";
 
   cmakeFlags = [
     (lib.cmakeFeature "CMAKE_INCLUDE_PATH" "${pcl'}/include/pcl-${lib.versions.majorMinor pcl'.version}")

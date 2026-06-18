@@ -6,9 +6,9 @@
   libGL,
   glew,
   pkg-config,
-  openalSoft,
+  openal-soft,
   freealut,
-  wxGTK32,
+  wxwidgets_3_2,
   libogg,
   freetype,
   libvorbis,
@@ -32,9 +32,9 @@ stdenv.mkDerivation (finalAttrs: {
     libGLU
     libGL
     glew
-    openalSoft
+    openal-soft
     freealut
-    wxGTK32
+    wxwidgets_3_2
     libogg
     freetype
     libvorbis
@@ -65,7 +65,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   configureFlags = [ "--with-fftw=${fftwSinglePrec.dev}" ];
 
-  NIX_LDFLAGS = "-lopenal";
+  env.NIX_LDFLAGS = "-lopenal";
 
   meta = {
     homepage = "http://scorched3d.co.uk/";
