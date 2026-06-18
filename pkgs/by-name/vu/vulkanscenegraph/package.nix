@@ -36,6 +36,10 @@ stdenv.mkDerivation (finalAttrs: {
     vulkan-loader
   ];
 
+  cmakeFlags = [
+    (lib.cmakeBool "BUILD_SHARED_LIBS" true)
+  ];
+
   meta = {
     description = "Vulkan & C++17 based Scene Graph Project";
     homepage = "https://www.vulkanscenegraph.org";
